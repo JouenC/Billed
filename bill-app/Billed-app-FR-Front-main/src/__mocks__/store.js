@@ -83,11 +83,25 @@ const mockedBills = {
     })
   },
 }
+const mockMockedUser = {email:"toto@test.fr", password:"toto"}
+
 
 export default {
   bills() {
     return mockedBills
     //return {}
   },
+  async login(userString) {
+    try {
+      if(!userString) throw new Error("User don't exist")
+      const user = JSON.parse(userString)
+      if(user.email === mockMockedUser.email && user.password === mockMockedUser.password) {
+        return await {jwt : "valid jwt token"}
+      }
+    } catch (err) {
+      return "Error"
+    }
+    
+  }
 }
 
